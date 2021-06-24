@@ -1,0 +1,457 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>reveal.js</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/black.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section class="main myclass">
+					<h1>Typescript</h1>
+				</section>
+				<section class="whatis myclass">
+					<h2>What is typescript</h2>
+					<p><em>TypeScript</em> stands in an unusual relationship to JavaScript. TypeScript offers all of JavaScript’s
+						features,
+						and an additional layer on top of these: TypeScript’s type system.
+					</p>
+					<p>
+						<em>TypeScript</em> supports object-oriented programming features like data types, classes, enums, etc., allowing JavaScript to be used at scale.
+	
+					</p>
+					<p><em>The type system</em> increases the code quality, readability and makes it easy to maintain and refactor
+						codebase.
+						More importantly, errors can be caught at compile time rather than at runtime.
+					</p>
+					<p><em>TypeScript</em> compiles into simple JavaScript. The TypeScript compiler is also implemented in
+						TypeScript
+						and can
+						be used with any browser or JavaScript engines like Node.js.
+					</>
+					<p></p>
+				</section>
+				<section class="annotation myclass">
+					<section class="basic">
+						<h2>Type annotation</h2>
+						<ul>
+							<li>Type inference</li>
+							<li>Type assertion</li>
+							<li>Basic Types</li>
+							<li>Union Types</li>
+							<li>Enums</li>
+							<li>Turple</li>
+						</ul>
+					</section>
+					<section class="addtype">
+						<p><em>TypeScript</em> is a typed language, where we can specify the type of the
+							variables, function parameters and object properties. We can specify
+							the type using <em>: Type</em> after the name of the variable, parameter or property.
+						</p>
+						<pre><code>
+									let name: type;
+									let name: type = some mean;
+							</code></pre>
+						<p>In most cases, though, this isn’t needed. Wherever possible,
+							TypeScript tries to automatically infer the types in your code.</p>
+					</section>
+					<section class="inference">
+						<h2>Type Inference</h2>
+						<p><em>TypeScript</em> infers types of variables when there is
+							no explicit information available in the form of type annotations.</p>
+						<p>Types are inferred by TypeScript compiler when:</p>
+						<ul>
+							<li>Variables are initialized</li>
+							<li>Default values are set for parameters</li>
+							<li>Function return types are determined</li>
+						</ul>
+					</section>
+					<section class="inferences-types">
+						<h4>Common-inferences</h4>
+						<p>When a type inference is made from several expressions, the types
+							of those expressions are used to calculate a “best common type”. For example.
+						</p>
+						<pre><code>const arr = [0, 1, "test"];</code></pre>
+						<p>Here, the type would be <em>(string | number)</em> which means that the array
+							can hold either string values or number values.
+						</p>
+						<h4>Context-inferences</h4>
+						<p>Type inference also works in “the other direction” in some cases in TypeScript. This is
+							known as “contextual typing”. Contextual typing occurs when the type of an expression is
+							implied by its location.
+						</p>
+	
+						<pre><code>
+								window.onmousedown = function (mouseEvent) {
+								console.log(mouseEvent.button); //&lt;- OK
+								console.log(mouseEvent.kangaroo); //&lt;- Error!
+							};
+												</code></pre>
+					</section>
+					<section class="assertions">
+						<h2>Type assertion</h2>
+						<p>
+							Type assertion allows you to set the type of a value and tell the compiler
+							not to infer it. There are two ways to do type assertion in TypeScript:
+						</p>
+						<p>1. Using the <em>the angle-bracket</em> syntax:</>
+						<pre><code>
+								let code: any = 123; 
+								let employeeCode = &lt;number&gt; code; 
+							</code></pre>
+						<p>2. Using <em>'as'</em> keyword</p>
+						<pre><code>
+								let code: any = 123; 
+								let employeeCode = code as number;
+							</code></pre>
+	
+					</section>
+					<section class="interest">
+						<h2>Interesting Assertion</h2>
+						<p>Writing  “!”  after any expression is effectively a type assertion that the value isn’t null or undefined.
+						</p>
+						<pre><code>
+							function liveDangerously(x?: number | null) {
+								// No error
+								console.log(x!.toFixed());
+							}
+						</code></pre>
+					</section>
+				</section>
+				<section class="basicTypes myclass">
+					<section class="basictypeslist">
+						<h2>Primitive Types</h2>
+						<ul>
+							<li>string</li>
+							<li>boolean</li>
+							<li>number</li>
+							<li>null</li>
+							<li>undefined</li>
+						</ul>
+					</section>
+					<section class="primitivetypes">
+						<h2>The primitives :string, number, and boolean</h2>
+						<ul>
+							<li><em>string: </em> string represents string values like "Hello, world"</li>
+							<li><em>number: </em> number is for numbers like 42</li>
+							<li><em>boolean: </em> boolean is for the two values true and false</li>
+						</ul>
+						<pre><code>
+									let myVar2:number=5;
+	
+									let myVar3:string;
+	
+									let myVar4:boolean=false;
+								</code></pre>
+					</section>
+					
+					<section class="any">
+						<h2>Type Any</h2>
+						<p>
+							TypeScript also has a special type, <em>any</em>, that you can use whenever you
+							don’t want a particular value to cause typechecking errors.
+						</p>
+	
+						<pre><code>
+								let something: any = "Hello World!"; 
+								something = 23;
+								something = true;	
+							 </code></pre>
+	
+						<p>
+							You usually want to avoid this, though, because any isn’t type-checked.
+							Use the compiler flag noImplicitAny to flag any implicit any as an error.
+						</p>
+					</section>
+					<section class="never">
+						<h2>Type Never</h2>
+						<p>
+							TypeScript introduced a new <em>type never</em>, which indicates the values that
+							will never occur. The <em>never type</em> is used when you are sure that
+							something is never going to occur. For example, you write a
+							function which will not return to its end point or always
+							throws an exception.
+						</p>
+	
+						<pre><code>
+								function throwError(errorMsg: string): never { 
+									throw new Error(errorMsg); 
+								} 
+							</code></pre>
+					</section>
+				</section>
+				<section class="array myclass">
+					<h2>Type Array</h2>
+					<p>To specify the type of an array like [1, 2, 3], you can use the syntax
+						<em>number[]</em>. This syntax works for any type (e.g. <em>string[]</em> is an array of
+						strings, and so on). You may also see this written as <em>Array&lt;number&gt;</em>,
+						which means the same thing.
+					</p>
+	
+					<pre><code>
+				let fruits: string[] = ['Apple', 'Orange', 'Banana'];
+				let fruits: Array&lt;string&gt; = ['Apple', 'Orange', 'Banana'];
+						</code></pre>
+	
+					<p>
+						Arrays can contain elements of any data type, numbers, strings, or even objects.
+						Arrays can be declared and initialized separately.
+					</p>
+	
+					<pre><code>
+							let ids: Array&lt;number&gt;;
+							ids = [23, 34, 100, 124, 44];
+						</code></pre>
+				</section>
+				<section class="object myclass">
+					<section class="object-basic">
+						<h2>Object Types</h2>
+						<p>
+							Apart from primitives, the most common sort of type you’ll encounter is an
+							object type. This refers to any JavaScript value with properties, which is
+							almost all of them! To define an object type, we simply list its properties
+							and their types.
+						</p>
+	
+						<pre><code>
+				function printCoord(pt: { x: number; y: number }) {
+					console.log("The coordinate's x value is " + pt.x);
+					console.log("The coordinate's y value is " + pt.y);
+				}
+				printCoord({ x: 3, y: 7 });
+						</code></pre>
+	
+						<p>
+							The type part of each property is also optional. If you don’t specify a type,
+							it will be assumed to be any.
+						</p>
+					</section>
+					<section class="object-data">
+						<p>
+							In JavaScript, the fundamental way that we group and pass around data is through 
+						objects. In TypeScript, we represent those through object types.
+						</p>
+	
+						<p>As we’ve seen, they can be anonymous:</p>
+	
+						<pre><code>
+							function greet(person: { name: string; age: number }) {
+								return "Hello " + person.name;
+							}
+						</code></pre>
+					</section>
+					<section class="interface-object">
+							<p>
+								or they can be named by using either an interface: 
+							</p>
+		
+							<pre><code>
+								interface Person {
+									name: string;
+									age: number;
+								}
+									
+								function greet(person: Person) {
+									return "Hello " + person.name;
+								}
+							</code></pre>
+					</section>					
+					<section class="alias-object">
+						<p>or a type alias:</p>
+	
+						<pre><code>
+							type Person = {
+								name: string;
+								age: number;
+							};
+								
+							function greet(person: Person) {
+								return "Hello " + person.name;
+							}
+						</code></pre>
+					</section>
+					<section class="object-modifiers">
+						<p>
+							If you don`t know if you will use some property, you can mark those properties as optional by adding a 
+							question mark <em>(?)</em> to the end of their names.
+						</p>
+	
+						<pre><code>
+								interface PaintOptions {
+									shape: Shape;
+									xPos?: number;
+									yPos?: number;
+								}
+							</code></pre>
+	
+					</section>
+					<section class="object-readonly">
+						<p>
+							Properties can also be marked as <em>readonly</em> for TypeScript.
+						</p>
+	
+						<pre><code>
+								interface SomeType {
+									readonly prop: string;
+								}
+							</code></pre>
+					</section>
+				</section>
+				<section class="union myclass">
+					<h2>Union Types</h2>
+					<p><em>A union type</em> is a type formed from two or more other types, representing values that may be
+						any one of those types. We refer to each of these types as the union’s members.
+					</p>
+	
+					<pre><code>
+							let code: (string | number);
+							code = 123;   // OK
+							code = "ABC"; // OK
+							code = false; // Compiler Error
+						</code></pre>
+				</section>
+				<section class="aliases myclass">
+					<h2>Type Aliases</h2>
+					<p>We’ve been using object types and union types by writing them directly in type
+						annotations. This is convenient, but it’s common to want to use the same type
+						more than once and refer to it by a single name.</p>
+	
+					<pre><code>
+							type PersonIdent = number;
+							let ivanovId:PersonIdent = 25;
+						</code></pre>
+					<p>
+						You can actually use a type alias to give a name to any type at all, not just
+						an object type. For example, a type alias can name a union type.
+					</p>
+	
+					<pre><code>
+							type Color = number | string;
+							let danger: Color = 0xFF0000;
+							let success: Color = 'green';
+						</code></pre>
+				</section>
+				<section class="enums myclass">
+					<section class="enums-basic">
+						<h2>Enumerated Types</h2>
+						<p>
+							Enums are one of the few features TypeScript has which is not a type-level
+							extension of JavaScript.
+						</p>
+						<h5>
+							There are three types of enums:
+						</h5>
+						<ul>
+							<li>Numeric enum</li>
+							<li>String enum</li>
+							<li>Heterogeneous enum</li>
+						</ul>
+					</section>
+					<section class="enums-numeric">
+						<p>
+							<em>Numeric enums</em> are number-based enums i.e. they store string values as numbers.
+							Enums are always assigned numeric values when they are stored. The first value
+							always takes the numeric value of 0, while the other values in the enum are
+							incremented by 1. We also have the option to initialize the first numeric
+							value ourselves.
+						</p>
+						<pre><code>
+								enum PrintMedia {     
+									Newspaper,
+									Newsletter,
+									Magazine,
+									Book,
+								}
+							</code></pre>
+						<p>
+							So result will be:
+							Newspaper = 0,
+							Newsletter = 1,
+							Magazine = 2,
+							Book = 3
+						</p>
+					</section>
+					<section class="enums-string">
+						<p>
+							<em>String enums</em> are a similar concept, but have some subtle runtime differences
+							as documented below. In a string enum, each member has to be constant-initialized
+							with a string literal, or with another string enum member.
+						</p>
+	
+						<pre><code>
+								enum Direction {
+									Up = "UP",
+									Down = "DOWN",
+									Left = "LEFT",
+									Right = "RIGHT",
+								}
+							</code></pre>
+					</section>
+					<section class="enums-heterogen">
+						<p><em>Heterogeneous enums</em> are enums that contain both string and numeric values.</p>
+						<pre><code>
+							enum Status { 
+								Active = 'ACTIVE', 
+								Deactivate = 1, 
+								Pending
+							}
+						</code></pre>
+					</section>
+				</section>
+				<section class="turple myclass">
+					<h2>Turple</h2>
+					<p>
+						A <em>Tuple</em> is an array which store multiple fields belong to different data types.
+					</p>
+	
+					<pre><code>
+							let tuple_name = [val1,val2,val3, ...val n];  
+						</code></pre>
+					<h5>A Tuple works like an array with some additional considerations:</h5>
+					<ul>
+						<li>The number of elements in the tuple is fixed.</li>
+						<li>The types of elements are known, and need not be the same.</li>
+					</ul>
+	
+					<p>
+						We can read or access the fields of a tuple by using the index, which is the same
+						as an array. In Tuple, the index starts from zero.
+					</p>
+					<pre><code>
+				let empTuple = ["Rohit Sharma", 25, "JavaTpoint"];  
+				console.log("Name of the Employee is : "+empTuple [0]); 
+						</code></pre>
+	
+				</section>
+				<section class="result myclass">
+					<h2>Thanks for your attention</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
